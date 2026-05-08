@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jednotka 1.02 | Rezidence Bystřice</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --off-white: #fcfcfc;
+            --antracit: #121212;
+            --gold: #c5a059;
+            --gray-light: #f0f0f0;
+            --text-muted: #666666;
+            --radius-lg: 24px;
+            --radius-sm: 12px;
+            --transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--off-white); color: var(--antracit); font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.6; }
+
+        /* --- NAVIGACE --- */
+        .glass-nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px);
+            z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .logo { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.3rem; text-transform: uppercase; text-decoration: none; color: inherit; }
+        .logo span { color: var(--gold); }
+        .nav-links a { text-decoration: none; color: var(--antracit); font-weight: 700; font-size: 0.8rem; margin-left: 30px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- DETAIL JEDNOTKY --- */
+        .unit-detail { padding: 140px 5% 80px 5%; max-width: 1400px; margin: 0 auto; }
+        .unit-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 20px; }
+        .unit-header h1 { font-family: 'Montserrat'; font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1; }
+        .unit-price-tag { font-size: 2rem; font-weight: 800; color: var(--gold); }
+
+        /* --- SLIDER GALERIE --- */
+        .slider-container {
+            position: relative; width: 100%; height: 600px;
+            border-radius: var(--radius-lg); overflow: hidden;
+            background: #eee; margin-bottom: 60px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+        .slider-wrapper { display: flex; width: 100%; height: 100%; transition: transform 0.5s ease-in-out; }
+        .slide { min-width: 100%; height: 100%; background-size: cover; background-position: center; }
+
+        /* Šipky */
+        .arrow {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9); border: none;
+            width: 50px; height: 50px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; z-index: 10; transition: 0.3s;
+        }
+        .arrow:hover { background: var(--gold); color: white; }
+        .prev { left: 20px; } .next { right: 20px; }
+
+        /* --- INFO SEKCE --- */
+        .info-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 80px; }
+        .specs-table { background: white; padding: 40px; border-radius: var(--radius-lg); border: 1px solid var(--gray-light); }
+        .spec-row { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--gray-light); }
+        .spec-label { color: var(--text-muted); font-weight: 600; }
+        .spec-value { font-weight: 800; }
+
+        .btn-contact { 
+            display: block; width: 100%; background: var(--antracit); color: white; 
+            text-align: center; padding: 20px; border-radius: var(--radius-sm); 
+            text-decoration: none; font-weight: 700; margin-top: 30px; transition: 0.3s; 
+        }
+        .btn-contact:hover { background: var(--gold); }
+
+        @media (max-width: 992px) {
+            .slider-container { height: 400px; }
+            .info-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        /* --- PATIČKA --- */
+        .premium-footer { background: #fff; border-top: 1px solid var(--gray-light); padding: 80px 5% 40px 5%; margin-top: 100px; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-column h4 { font-weight: 700; margin-bottom: 20px; color: var(--gold); text-transform: uppercase; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+<nav class="glass-nav">
+    <a href="/rezidencebystrice" class="logo">Rezidence <span>Bystřice</span></a>
+    <div class="nav-links">
+        <a href="/rezidencebystrice">Domov</a>
+        <a href="/rezidencebystrice/katalog">Katalog</a>
+        <a href="/rezidencebystrice/kontakt">Kontakt</a>
+    </div>
+</nav>
+
+<main class="unit-detail">
+    <div class="unit-header">
+        <div>
+            <span style="color: var(--gold); font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Rodinné bydlení</span>
+            <h1>Jednotka 1.02</h1>
+        </div>
+        <div class="unit-price-tag">6.200.000 Kč</div>
+    </div>
+
+    <div class="slider-container">
+        <button class="arrow prev" onclick="moveSlide(-1)">❮</button>
+        <button class="arrow next" onclick="moveSlide(1)">❯</button>
+        
+        <div class="slider-wrapper" id="sliderWrapper">
+            <div class="slide" style="background-image: url('https://i.imgur.com/JAYwY6a.jpeg');"></div>
+            <div class="slide" style="background-image: url('https://i.imgur.com/8WQOXoD.jpeg');"></div>
+            <div class="slide" style="background-image: url('https://i.imgur.com/o1gs4Ao.jpeg');"></div>
+        </div>
+    </div>
+
+    <div class="info-grid">
+        <div class="description">
+            <h2 style="font-family: 'Montserrat'; margin-bottom: 25px;">Prostorný byt pro rodinu</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 20px;">Jednotka 1.02 nabízí velkorysý prostor o dispozici 3+kk. Interiér je navržen v přírodních tónech s důrazem na dřevěné prvky a velké prosklené plochy, které propojují domov s okolní zelení.</p>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Byt disponuje dvěma samostatnými ložnicemi, prostornou koupelnou a hlavním obývacím prostorem s přímým vstupem na balkon.</p>
+        </div>
+
+        <div class="specs-card">
+            <div class="specs-table">
+                <div class="spec-row"><span class="spec-label">Dispozice</span><span class="spec-value">3+kk</span></div>
+                <div class="spec-row"><span class="spec-label">Užitná plocha</span><span class="spec-value">78.5 m²</span></div>
+                <div class="spec-row"><span class="spec-label">Podlaží</span><span class="spec-value">1. NP</span></div>
+                <div class="spec-row"><span class="spec-label">Stav</span><span class="spec-value" style="color: green;">Volný</span></div>
+                <div class="spec-row"><span class="spec-label">Balkon</span><span class="spec-value">Ano (8.5 m²)</span></div>
+                
+                <a href="/rezidencebystrice/kontakt" class="btn-contact">MÁM ZÁJEM O PROHLÍDKU</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="premium-footer">
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <div class="logo">Rezidence <span>Bystřice</span></div>
+            <p style="margin-top: 20px; color: var(--text-muted);">Váš nový domov v srdci přírody.</p>
+        </div>
+        <div class="footer-column">
+            <h4>Kontakt</h4>
+            <p>+420 777 694 666</p>
+            <p>prodej@rezidencebystrice.cz</p>
+        </div>
+        <div class="footer-column">
+            <h4>Fakturační údaje</h4>
+            <p>Rezidence Bystřice s.r.o.</p>
+            <p>IČO: 123 45 678</p>
+        </div>
+    </div>
+    <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--gray-light); padding-top: 30px;">
+        © 2026 Rezidence Bystřice. Všechna práva vyhrazena.
+    </p>
+</footer>
+
+<script>
+    let currentSlide = 0;
+    const sliderWrapper = document.getElementById('sliderWrapper');
+    const slides = document.querySelectorAll('.slide');
+
+    function moveSlide(direction) {
+        currentSlide += direction;
+        if (currentSlide >= slides.length) currentSlide = 0;
+        if (currentSlide < 0) currentSlide = slides.length - 1;
+        sliderWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+</script>
+
+</body>
+</html>

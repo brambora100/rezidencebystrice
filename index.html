@@ -66,7 +66,11 @@
             transition: var(--transition);
         }
 
-        /* HAMBURGER IKONA (Skrytá na PC) */
+        /* Aktivní stav odkazu */
+        .nav-links a.active {
+            color: var(--gold) !important;
+        }
+
         .hamburger {
             display: none;
             cursor: pointer;
@@ -97,10 +101,9 @@
                 box-shadow: -10px 0 30px rgba(0,0,0,0.05);
             }
             .nav-links.active { right: 0; }
-            .nav-links a { margin: 20px 0; font-size: 1.2rem; }
+            .nav-links a { margin: 20px 0; font-size: 1.2rem; margin-left: 0; }
             .hamburger { display: block; }
             
-            /* Animace křížku */
             .hamburger.toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
             .hamburger.toggle .line2 { opacity: 0; }
             .hamburger.toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
@@ -172,9 +175,9 @@
     </button>
     
     <div class="nav-links" id="navLinks">
-        <a href="/rezidencebystrice">Domov</a>
+        <a href="/rezidencebystrice" class="active">Domov</a>
         <a href="/rezidencebystrice/katalog">Katalog</a>
-        <a href="/rezidencebystrice/kontakt" style="color: var(--gold); font-weight: 800;">Kontakt</a>
+        <a href="/rezidencebystrice/kontakt" style="font-weight: 800;">Kontakt</a>
     </div>
 </nav>
 
@@ -255,10 +258,13 @@
             <p>IČO: 123 45 678</p>
         </div>
     </div>
+
+    <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--gray-light); padding-top: 30px;">
+        © 2026 Rezidence Bystřice. Všechna práva vyhrazena.
+    </p>
 </footer>
 
 <script>
-    // Mobilní menu toggle
     function toggleMenu() {
         const nav = document.getElementById('navLinks');
         const burger = document.querySelector('.hamburger');
@@ -266,7 +272,6 @@
         burger.classList.toggle('toggle');
     }
 
-    // Automatická kontrola počtu bytů
     document.addEventListener("DOMContentLoaded", function() {
         const grid = document.getElementById('apt-grid');
         const cards = grid.getElementsByClassName('apt-card');
